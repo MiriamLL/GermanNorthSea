@@ -1,0 +1,126 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# German North Sea
+
+This package contains shapefiles from the **German North Sea**: <br>  
+- Natura2000: https://www.eea.europa.eu/data-and-maps/data/natura-13/natura-2000-spatial-data/natura-2000-shapefile-1
+- Country shape: https://www.diva-gis.org/datadown
+- Economic Exclusive zone: https://marineregions.org/gazetteer.php?p=details&id=5669
+- ICES rectangles: https://gis.ices.dk/shapefiles/ICES_rectangles.zip
+
+The goal is provide easy access to shapefiles of the North Sea
+
+## Installation
+
+```{r, eval=FALSE}
+# install.packages("devtools")
+devtools::install_github("MiriamLL/GermanNorthSea")
+```
+
+```{r libreria}
+library(GermanNorthSea)
+```
+
+# Data
+
+### German Land
+```{r}
+German_land<-GermanNorthSea::German_land
+```
+
+```{r}
+ggplot2::ggplot()+ ggplot2::geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  ggplot2::coord_sf(xlim = c(2,9), ylim = c(53,56),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+### German EEZ
+```{r}
+German_EEZ<-GermanNorthSea::German_EEZ
+```
+
+```{r}
+ggplot2::ggplot()+ ggplot2::geom_sf(data = German_EEZ,
+                                    colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 1)
+```
+
+
+### German Coast
+Load data
+```{r}
+German_coast<-GermanNorthSea::German_coast
+```
+
+```{r}
+ggplot2::ggplot()+ ggplot2::geom_sf(data = German_coast, 
+                                    colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 1,linetype="dashed")
+```
+
+
+
+### German Natura 2000
+```{r}
+library(sf)
+```
+
+```{r}
+German_natura<-GermanNorthSea::German_natura
+```
+
+```{r}
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)
+```
+
+# General map
+```{r}
+library(ggplot2)
+library(ggspatial)
+```
+
+```{r}
+ggplot() +
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  geom_sf(data = German_EEZ, colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 0.5)+
+  geom_sf(data = German_coast, colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 0.5,linetype="dashed")+
+  
+  geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+
+  ggspatial::annotation_north_arrow(location ="bl", which_north = "true", 
+        pad_x = unit(1, "in"), 
+        pad_y = unit(0.05, "in"),
+        
+        style = north_arrow_fancy_orienteering)+
+  
+  theme(
+  legend.spacing.y = unit(0.05, 'cm'),
+  legend.text=element_text(size=10),
+  legend.background = element_rect(fill='transparent',colour ="transparent"),
+  legend.box.background = element_rect(fill='transparent',colour ="transparent"),
+  legend.key = element_rect(fill = "transparent", colour = "transparent"),
+  panel.background = element_rect(fill = '#bde0fe'))+
+  
+  xlab('Longitude')+ylab('Latitude')+
+  
+  scale_y_continuous(breaks = seq(from = c(53,56)[1], to = c(53,56)[2], by = 1))+
+  
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=1.5))+
+  
+  ggplot2::coord_sf(xlim = c(2,9), ylim = c(53,56),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
