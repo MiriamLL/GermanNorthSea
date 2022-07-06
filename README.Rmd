@@ -23,6 +23,10 @@ This package contains shapefiles from the **German North Sea**: <br>
 
 The goal is provide easy access to shapefiles of the North Sea
 
+All shapefiles are in CRS 3035.
+
+
+
 ## Installation
 
 ```{r, eval=FALSE}
@@ -37,44 +41,47 @@ library(GermanNorthSea)
 # Data
 
 ### German Land
+
 ```{r}
 German_land<-GermanNorthSea::German_land
 ```
 
 ```{r}
 ggplot2::ggplot()+ ggplot2::geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
-  ggplot2::coord_sf(xlim = c(2,9), ylim = c(53,56),
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
 ### German EEZ
+
 ```{r}
 German_EEZ<-GermanNorthSea::German_EEZ
 ```
 
 ```{r}
 ggplot2::ggplot()+ ggplot2::geom_sf(data = German_EEZ,
-                                    colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 1)
+                                    colour = "red", fill= NA,alpha=0.9, lwd = 1)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
 
 ### German Coast
-Load data
+
 ```{r}
 German_coast<-GermanNorthSea::German_coast
 ```
 
 ```{r}
 ggplot2::ggplot()+ ggplot2::geom_sf(data = German_coast, 
-                                    colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 1,linetype="dashed")
+                                    colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 1,linetype="dashed")+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
 
 
 ### German Natura 2000
-```{r}
-library(sf)
-```
 
 ```{r}
 German_natura<-GermanNorthSea::German_natura
@@ -82,10 +89,28 @@ German_natura<-GermanNorthSea::German_natura
 
 ```{r}
 ggplot2::ggplot()+ 
-  ggplot2::geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)
+  ggplot2::geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
+# ICES Rectangles
+
+```{r}
+German_ICES<-GermanNorthSea::German_ICES
+```
+
+```{r}
+ggplot2::ggplot(German_ICES)+ 
+  ggplot2::geom_sf(data = German_ICES, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  ggplot2::geom_sf_text(aes(label =ICESNAME),size=3,family="sans")+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+
 # General map
+
 ```{r}
 library(ggplot2)
 library(ggspatial)
@@ -94,14 +119,14 @@ library(ggspatial)
 ```{r}
 ggplot() +
   geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
-  geom_sf(data = German_EEZ, colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 0.5)+
-  geom_sf(data = German_coast, colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 0.5,linetype="dashed")+
+  geom_sf(data = German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
+  geom_sf(data = German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
   
-  geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 0.5)+
   geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
 
   ggspatial::annotation_north_arrow(location ="bl", which_north = "true", 
-        pad_x = unit(1, "in"), 
+        pad_x = unit(0.05, "in"), 
         pad_y = unit(0.05, "in"),
         
         style = north_arrow_fancy_orienteering)+
@@ -116,11 +141,17 @@ ggplot() +
   
   xlab('Longitude')+ylab('Latitude')+
   
-  scale_y_continuous(breaks = seq(from = c(53,56)[1], to = c(53,56)[2], by = 1))+
-  
   theme(panel.border = element_rect(colour = "black", fill=NA, size=1.5))+
   
-  ggplot2::coord_sf(xlim = c(2,9), ylim = c(53,56),
+  ggplot2::coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
+
+# Other CRS
+
+For using other CRS, yu can use the function **st_transform** from the package **sf**
+```{r, eval=FALSE}
+German_natura<-st_transform(German_natura, 3035)
+```
+
 
