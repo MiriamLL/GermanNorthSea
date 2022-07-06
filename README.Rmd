@@ -237,7 +237,8 @@ ggplot(ICES_rectangles)+
 ```
 
 
-#Other CRS
+
+# Other CRS
 
 For using other CRS, you can use the function **st_transform** from the package **sf**.
 
@@ -281,7 +282,7 @@ ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-#Other sources
+# Other sources
 
 - [GEBCO](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
 

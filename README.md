@@ -245,7 +245,7 @@ ggplot(ICES_rectangles)+
 
 <img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />
 
-\#Other CRS
+# Other CRS
 
 For using other CRS, you can use the function **st_transform** from the
 package **sf**.
@@ -293,6 +293,6 @@ ggplot()+
 
 <img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
 
-\#Other sources
+# Other sources
 
 -   [GEBCO](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
