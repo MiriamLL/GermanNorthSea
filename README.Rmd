@@ -41,6 +41,9 @@ library(GermanNorthSea)
 
 ### German Land
 
+To download go to: [DIVA-GIS](https://www.diva-gis.org/datadown)<br> 
+Select the country and Administrative areas. 
+
 ```{r}
 German_land<-GermanNorthSea::German_land
 ```
@@ -52,6 +55,10 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = German_land, colour = 'black', fill =
 ```
 
 ### German EEZ
+
+To download: go to [EMODnet](https://www.emodnet-humanactivities.eu/view-data.php)>Select wind farms in the map.
+Select Other Forms of Area Management/Designation>Click on the download icon on [Exlusive Economic Zone](https://www.emodnet-humanactivities.eu/search-results.php?dataname=Exclusive+Economic+Zone).
+Select Download Data, Select the country, and the Sector, and the Link should be ready to download.
 
 ```{r}
 German_EEZ<-GermanNorthSea::German_EEZ
@@ -83,6 +90,9 @@ ggplot2::ggplot()+
 
 ### German Natura 2000
 
+To download: go to [GeoSeaPortal](https://www.geoseaportal.de/atomfeeds/Raumordnungsplan_AWZ_en.xml#download=1.)
+The zip contains several shapefiles including **NatureConservation**
+
 ```{r}
 German_natura<-GermanNorthSea::German_natura
 ```
@@ -96,6 +106,9 @@ ggplot2::ggplot()+
 
 ## ICES Rectangles
 
+Source: [ICES rectangles](https://gis.ices.dk/sf/index.html)<br> 
+To download: go to link> click on **Quick Downloads**> select ICES Statistical Rectangles.
+
 ```{r}
 German_ICES<-GermanNorthSea::German_ICES
 ```
@@ -107,7 +120,42 @@ ggplot2::ggplot(German_ICES)+
   ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
-# BATH
+
+
+## Wind Farms
+
+
+#### BfN
+To download: go to [GeoSeaPortal](https://www.geoseaportal.de/atomfeeds/Raumordnungsplan_AWZ_en.xml#download=1.)
+The zip contains several shapefiles including **'OffshoreWindEnergy'**
+
+```{r}
+German_OWF<-GermanNorthSea::German_OWF
+```
+
+```{r}
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = German_OWF, colour = "#fe0001", fill= '#bde0fe',alpha=0.9, size=1)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+
+#### EMODnet
+
+```{r}
+OWF_EMODnet<-GermanNorthSea::OWF_EMODnet
+```
+
+```{r}
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = OWF_EMODnet, colour = "#fe0001", fill= '#bde0fe',alpha=0.9, size=1)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+
+
 
 # Maps
 
@@ -236,6 +284,22 @@ ggplot(ICES_rectangles)+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
+## Wind Farms
+
+```{r}
+ggplot()+ 
+  geom_sf(data = German_EEZ,colour = "red", fill= NA,alpha=0.9, lwd = 1)+
+  geom_sf(data = German_coast,colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 1,linetype="dashed")+
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  geom_sf(data = OWF_EMODnet, aes(fill= STATUS), colour = "grey",alpha=0.9, size=0.5)+
+  
+  scale_fill_manual(values = c("yellow", "blue", "green"))+
+  
+  coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))+
+  theme(legend.position = 'bottom')
+```
 
 
 # Other CRS
@@ -285,4 +349,7 @@ ggplot()+
 # Other sources
 
 - [GEBCO](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
+- [Marine Traffic](https://www.marinetraffic.com/en/ais/home/centerx:8.6/centery:53.9/zoom:9)
+- [Offshore wind farms](https://map.4coffshore.com/offshorewind/)
+
 
