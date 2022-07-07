@@ -57,7 +57,7 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = German_land, colour = 'black', fill =
 ### German EEZ
 
 To download: go to [EMODnet](https://www.emodnet-humanactivities.eu/view-data.php)>Select wind farms in the map.
-Select Other Forms of Area Management/Designation>Click on the download icon on [Exlusive Economic Zone](https://www.emodnet-humanactivities.eu/search-results.php?dataname=Exclusive+Economic+Zone).
+Select Other Forms of Area Management/Designation>Click on the download icon on [Exclusive Economic Zone](https://www.emodnet-humanactivities.eu/search-results.php?dataname=Exclusive+Economic+Zone).
 Select Download Data, Select the country, and the Sector, and the Link should be ready to download.
 
 ```{r}
@@ -131,7 +131,7 @@ German_Shipping<-GermanNorthSea::German_Shipping
 
 ```{r}
 ggplot2::ggplot()+ 
-  ggplot2::geom_sf(data = German_Shipping, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  ggplot2::geom_sf(data = German_Shipping, colour = "blue", fill= 'blue',alpha=0.2, lwd = 1)+
   ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
@@ -317,6 +317,24 @@ ggplot(OWF_EMODnet)+
   theme(legend.position = 'bottom')
 ```
 
+## Shipping
+
+```{r}
+German_Shipping<-GermanNorthSea::German_Shipping
+```
+
+```{r}
+ggplot(German_Shipping)+ 
+  geom_sf(data = German_EEZ,colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
+  geom_sf(data = German_coast,colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 0.5,linetype="dashed")+
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 0.5)+
+  geom_sf(data = German_Shipping, aes(fill= Type), colour = "grey",alpha=0.9, size=0.5)+
+  scale_fill_manual(values = c("blue", "deepskyblue", "turquoise"))+
+  coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))+
+  theme(legend.position = 'bottom')
+```
 
 # Other CRS
 
@@ -333,7 +351,7 @@ German_land<-st_transform(German_land, 4326)
 German_natura<-st_transform(German_natura, 4326)
 ```
 
-```{r}
+```{r, fig.height=8, fig.width=8}
 ggplot()+
   geom_sf(data = German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
   geom_sf(data = German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
@@ -368,4 +386,5 @@ ggplot()+
 - [Marine Traffic](https://www.marinetraffic.com/en/ais/home/centerx:8.6/centery:53.9/zoom:9)
 - [Offshore wind farms](https://map.4coffshore.com/offshorewind/)
 - [Windkraftanlagen](https://commons.wikimedia.org/wiki/File:Karte_Offshore-Windkraftanlagen_in_der_Deutschen_Bucht.png)
+- [Marine Spatial Planning](https://www.bsh.de/EN/TOPICS/Offshore/Maritime_spatial_planning/maritime_spatial_planning_node.html)
 
