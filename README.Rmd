@@ -121,6 +121,20 @@ ggplot2::ggplot(German_ICES)+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
+## Shipping
+To download: go to [GeoSeaPortal](https://www.geoseaportal.de/atomfeeds/Raumordnungsplan_AWZ_en.xml#download=1.)
+The zip contains several shapefiles including **Shipping**
+
+```{r}
+German_Shipping<-GermanNorthSea::German_Shipping
+```
+
+```{r}
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = German_Shipping, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
 
 ## Wind Farms
 
@@ -142,6 +156,8 @@ ggplot2::ggplot()+
 
 
 #### EMODnet
+
+To download: Go to [EMBO](https://www.emodnet-humanactivities.eu/view-data.php). Select [human activities](https://www.emodnet-humanactivities.eu/search-results.php?dataname=Wind+Farms+%28Polygons%29)
 
 ```{r}
 OWF_EMODnet<-GermanNorthSea::OWF_EMODnet
@@ -172,7 +188,7 @@ ggplot() +
   geom_sf(data = German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
   geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
 
-  ggspatial::annotation_north_arrow(location ="bl", which_north = "true", 
+  annotation_north_arrow(location ="bl", which_north = "true", 
         pad_x = unit(0.05, "in"), 
         pad_y = unit(0.05, "in"),
         
@@ -190,7 +206,7 @@ ggplot() +
   
   theme(panel.border = element_rect(colour = "black", fill=NA, size=1.5))+
   
-  ggplot2::coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
+  coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
@@ -231,11 +247,9 @@ ggplot(German_natura) +
 ```
 
 
-
-
 ## ICES rectangles
 
-```{r}
+```{r, message=FALSE}
 library(tidyverse)
 ```
 
@@ -262,7 +276,7 @@ ggplot(ICES_rectangles)+
   geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 0.5)+
   geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
 
-  ggspatial::annotation_north_arrow(location ="bl", which_north = "true", 
+  annotation_north_arrow(location ="bl", which_north = "true", 
         pad_x = unit(0.05, "in"), 
         pad_y = unit(0.05, "in"),
         
@@ -280,22 +294,24 @@ ggplot(ICES_rectangles)+
   
   theme(panel.border = element_rect(colour = "black", fill=NA, size=1.5))+
   
-  ggplot2::coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
+  coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
 ## Wind Farms
 
 ```{r}
-ggplot()+ 
-  geom_sf(data = German_EEZ,colour = "red", fill= NA,alpha=0.9, lwd = 1)+
-  geom_sf(data = German_coast,colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 1,linetype="dashed")+
+OWF_EMODnet<-GermanNorthSea::OWF_EMODnet
+```
+
+```{r}
+ggplot(OWF_EMODnet)+ 
+  geom_sf(data = German_EEZ,colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
+  geom_sf(data = German_coast,colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 0.5,linetype="dashed")+
   geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
-  geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 0.5)+
   geom_sf(data = OWF_EMODnet, aes(fill= STATUS), colour = "grey",alpha=0.9, size=0.5)+
-  
   scale_fill_manual(values = c("yellow", "blue", "green"))+
-  
   coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))+
   theme(legend.position = 'bottom')
@@ -351,5 +367,5 @@ ggplot()+
 - [GEBCO](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
 - [Marine Traffic](https://www.marinetraffic.com/en/ais/home/centerx:8.6/centery:53.9/zoom:9)
 - [Offshore wind farms](https://map.4coffshore.com/offshorewind/)
-
+- [Windkraftanlagen](https://commons.wikimedia.org/wiki/File:Karte_Offshore-Windkraftanlagen_in_der_Deutschen_Bucht.png)
 
