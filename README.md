@@ -413,5 +413,7 @@ ggplot()+
     Traffic](https://www.marinetraffic.com/en/ais/home/centerx:8.6/centery:53.9/zoom:9)
 -   [Offshore wind farms](https://map.4coffshore.com/offshorewind/)
 -   [Windkraftanlagen](https://commons.wikimedia.org/wiki/File:Karte_Offshore-Windkraftanlagen_in_der_Deutschen_Bucht.png)
+-   [Sea around us](https://www.seaaroundus.org/data/#/eez/278?chart=catch-chart&dimension=taxon&measure=tonnage&limit=10)
 -   [Marine Spatial
     Planning](https://www.bsh.de/EN/TOPICS/Offshore/Maritime_spatial_planning/maritime_spatial_planning_node.html)
+
