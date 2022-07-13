@@ -50,7 +50,7 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = German_land, colour = 'black', fill =
 
 To download: go to
 [EMODnet](https://www.emodnet-humanactivities.eu/view-data.php)\>Select
-wind farms in the map. Select Other Forms of Area
+Marine Spatial Planning from the list. Select Other Forms of Area
 Management/Designation\>Click on the download icon on [Exclusive
 Economic
 Zone](https://www.emodnet-humanactivities.eu/search-results.php?dataname=Exclusive+Economic+Zone).
