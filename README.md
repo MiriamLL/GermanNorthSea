@@ -29,10 +29,26 @@ library(GermanNorthSea)
 
 # Data
 
+## Base Maps
+
 ### German Land
 
 To download go to: [DIVA-GIS](https://www.diva-gis.org/datadown)<br>
 Select the country and Administrative areas.
+
+``` r
+Germany<-GermanNorthSea::Germany
+```
+
+``` r
+ggplot2::ggplot()+ ggplot2::geom_sf(data = Germany, colour = 'black', fill = '#ffffbe')+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
+### Europe
 
 ``` r
 German_land<-GermanNorthSea::German_land
@@ -44,13 +60,13 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = German_land, colour = 'black', fill =
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 ### German EEZ
 
 To download: go to
 [EMODnet](https://www.emodnet-humanactivities.eu/view-data.php)\>Select
-Marine Spatial Planning from the list. Select Other Forms of Area
+wind farms in the map. Select Other Forms of Area
 Management/Designation\>Click on the download icon on [Exclusive
 Economic
 Zone](https://www.emodnet-humanactivities.eu/search-results.php?dataname=Exclusive+Economic+Zone).
@@ -68,7 +84,7 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = German_EEZ,
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
 ### German Coast
 
@@ -84,28 +100,9 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
-
-### German Natura 2000
-
-To download: go to
-[GeoSeaPortal](https://www.geoseaportal.de/atomfeeds/Raumordnungsplan_AWZ_en.xml#download=1.)
-The zip contains several shapefiles including **NatureConservation**
-
-``` r
-German_natura<-GermanNorthSea::German_natura
-```
-
-``` r
-ggplot2::ggplot()+ 
-  ggplot2::geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
-  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
-                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
-```
-
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
-## ICES Rectangles
+### ICES Rectangles
 
 Source: [ICES rectangles](https://gis.ices.dk/sf/index.html)<br> To
 download: go to link\> click on **Quick Downloads**\> select ICES
@@ -125,7 +122,50 @@ ggplot2::ggplot(German_ICES)+
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
-## Shipping
+### German Natura 2000
+
+To download: go to
+[GeoSeaPortal](https://www.geoseaportal.de/atomfeeds/Raumordnungsplan_AWZ_en.xml#download=1.)
+The zip contains several shapefiles including **NatureConservation**
+
+Other option is
+[eea](https://www.eea.europa.eu/data-and-maps/data/natura-13)
+
+``` r
+German_natura<-GermanNorthSea::German_natura
+```
+
+``` r
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+
+Other option is [Europen Environment
+Agency](https://www.eea.europa.eu/data-and-maps/data/natura-14) This
+file contains a more complete data from the natura 2000 sites.
+
+For using the SCA (Special Conservation Areas) in Germany
+
+``` r
+German_SCA<-GermanNorthSea::German_SCA
+```
+
+``` r
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = German_SCA, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+
+## Human activities
+
+### Shipping lines
 
 To download: go to
 [GeoSeaPortal](https://www.geoseaportal.de/atomfeeds/Raumordnungsplan_AWZ_en.xml#download=1.)
@@ -142,9 +182,9 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
 
-## Wind Farms
+### Wind Farms
 
 #### BfN
 
@@ -163,7 +203,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />
 
 #### EMODnet
 
@@ -183,17 +223,23 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-22-1.png" width="100%" />
 
 # Maps
 
 ``` r
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 4.2.3
 library(ggspatial)
-#> Warning: package 'ggspatial' was built under R version 4.2.1
 ```
 
-## German EEZ and land
+## Base Maps
+
+``` r
+German_land<-GermanNorthSea::German_land
+German_EEZ<-GermanNorthSea::German_EEZ
+German_coast<-GermanNorthSea::German_coast
+```
 
 ``` r
 ggplot() +
@@ -221,11 +267,78 @@ ggplot() +
   
   coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+#> Warning: The `size` argument of `element_rect()` is deprecated as of ggplot2 3.4.0.
+#> ℹ Please use the `linewidth` argument instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
-<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-25-1.png" width="100%" />
 
-## German Natura 2000
+### ICES rectangles
+
+``` r
+library(tidyverse)
+#> Warning: package 'tidyverse' was built under R version 4.2.3
+#> Warning: package 'tibble' was built under R version 4.2.3
+#> Warning: package 'readr' was built under R version 4.2.3
+#> Warning: package 'dplyr' was built under R version 4.2.3
+#> Warning: package 'forcats' was built under R version 4.2.3
+#> Warning: package 'lubridate' was built under R version 4.2.3
+```
+
+``` r
+German_ICES<-GermanNorthSea::German_ICES
+```
+
+``` r
+ICES_rectangles<-German_ICES %>%
+  filter(ICESNAME %in% c('40F3','40F4',
+                         '39F4','39F5','39F6','39F7','39F8',
+                         '38F5','38F6','38F7','38F8',
+                         '37F5','37F6','37F7','37F8',
+                         '36F6','36F7','36F8'))
+```
+
+``` r
+ggplot(ICES_rectangles)+ 
+  geom_sf(data = ICES_rectangles, colour = "#14213d", fill= NA, alpha=0.2, lwd = 0.1)+
+  geom_sf_text(aes(label=ICESNAME),size=3,family="sans")+
+
+  geom_sf(data = German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
+  geom_sf(data = German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+
+  annotation_north_arrow(location ="bl", which_north = "true", 
+        pad_x = unit(0.05, "in"), 
+        pad_y = unit(0.05, "in"),
+        
+        style = north_arrow_fancy_orienteering)+
+  
+  theme(
+  legend.spacing.y = unit(0.05, 'cm'),
+  legend.text=element_text(size=10),
+  legend.background = element_rect(fill='transparent',colour ="transparent"),
+  legend.box.background = element_rect(fill='transparent',colour ="transparent"),
+  legend.key = element_rect(fill = "transparent", colour = "transparent"),
+  panel.background = element_rect(fill = '#bde0fe'))+
+  
+  xlab('Longitude')+ylab('Latitude')+
+  
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=1.5))+
+  
+  coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-29-1.png" width="100%" />
+
+## Protected areas
+
+``` r
+German_natura<-GermanNorthSea::German_natura
+```
 
 ``` r
 German_natura$Abbreviations<-c('SOR','BR','DB')
@@ -261,62 +374,11 @@ ggplot(German_natura) +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-22-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-32-1.png" width="100%" />
 
-## ICES rectangles
+## Human activities
 
-``` r
-library(tidyverse)
-```
-
-``` r
-German_ICES<-GermanNorthSea::German_ICES
-```
-
-``` r
-ICES_rectangles<-German_ICES %>%
-  filter(ICESNAME %in% c('40F3','40F4',
-                         '39F4','39F5','39F6','39F7','39F8',
-                         '38F5','38F6','38F7','38F8',
-                         '37F5','37F6','37F7','37F8',
-                         '36F6','36F7','36F8'))
-```
-
-``` r
-ggplot(ICES_rectangles)+ 
-  geom_sf(data = ICES_rectangles, colour = "#14213d", fill= NA, alpha=0.2, lwd = 0.1)+
-  geom_sf_text(aes(label=ICESNAME),size=3,family="sans")+
-
-  geom_sf(data = German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
-  geom_sf(data = German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
-  geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 0.5)+
-  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
-
-  annotation_north_arrow(location ="bl", which_north = "true", 
-        pad_x = unit(0.05, "in"), 
-        pad_y = unit(0.05, "in"),
-        
-        style = north_arrow_fancy_orienteering)+
-  
-  theme(
-  legend.spacing.y = unit(0.05, 'cm'),
-  legend.text=element_text(size=10),
-  legend.background = element_rect(fill='transparent',colour ="transparent"),
-  legend.box.background = element_rect(fill='transparent',colour ="transparent"),
-  legend.key = element_rect(fill = "transparent", colour = "transparent"),
-  panel.background = element_rect(fill = '#bde0fe'))+
-  
-  xlab('Longitude')+ylab('Latitude')+
-  
-  theme(panel.border = element_rect(colour = "black", fill=NA, size=1.5))+
-  
-  coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
-                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
-```
-
-<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
-
-## Wind Farms
+### Wind Farms
 
 ``` r
 OWF_EMODnet<-GermanNorthSea::OWF_EMODnet
@@ -335,9 +397,9 @@ ggplot(OWF_EMODnet)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-28-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-34-1.png" width="100%" />
 
-## Shipping
+### Shipping lines
 
 ``` r
 German_Shipping<-GermanNorthSea::German_Shipping
@@ -356,7 +418,9 @@ ggplot(German_Shipping)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-30-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-36-1.png" width="100%" />
+
+### Shipping intensity
 
 # Other CRS
 
@@ -365,7 +429,7 @@ package **sf**.
 
 ``` r
 library(sf)
-#> Linking to GEOS 3.9.1, GDAL 3.3.2, PROJ 7.2.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
 ```
 
 ``` r
@@ -404,16 +468,25 @@ ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-33-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-39-1.png" width="100%" />
 
 # Other sources
 
--   [GEBCO](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
--   [Marine
-    Traffic](https://www.marinetraffic.com/en/ais/home/centerx:8.6/centery:53.9/zoom:9)
--   [Offshore wind farms](https://map.4coffshore.com/offshorewind/)
--   [Windkraftanlagen](https://commons.wikimedia.org/wiki/File:Karte_Offshore-Windkraftanlagen_in_der_Deutschen_Bucht.png)
--   [Sea around us](https://www.seaaroundus.org/data/#/eez/278?chart=catch-chart&dimension=taxon&measure=tonnage&limit=10)
 -   [Marine Spatial
     Planning](https://www.bsh.de/EN/TOPICS/Offshore/Maritime_spatial_planning/maritime_spatial_planning_node.html)
 
+-   [Shipping
+    intensity](https://www.emodnet-humanactivities.eu/download-data.php)
+
+-   [Marine
+    Traffic](https://www.marinetraffic.com/en/ais/home/centerx:8.6/centery:53.9/zoom:9)
+
+-   [Offshore wind farms](https://map.4coffshore.com/offshorewind/)
+
+-   [Windkraftanlagen](https://commons.wikimedia.org/wiki/File:Karte_Offshore-Windkraftanlagen_in_der_Deutschen_Bucht.png)
+
+-   [GEBCO](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
+
+-   [NOAA-GRIDDAP-GLOBAL](https://erddap.ifremer.fr/erddap/griddap/index.html?page=1&itemsPerPage=1000)
+
+-   [COPERNICUS](https://resources.marine.copernicus.eu/products)
