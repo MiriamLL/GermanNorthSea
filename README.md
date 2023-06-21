@@ -5,12 +5,12 @@
 
 This package contains shapefiles from the **German North Sea**: <br>
 
--   [Natura2000](https://www.eea.europa.eu/data-and-maps/data/natura-13/natura-2000-spatial-data/natura-2000-shapefile-1)<br>
--   [Country shape](https://www.diva-gis.org/datadown)<br>
--   [Economic Exclusive
-    zone](https://marineregions.org/gazetteer.php?p=details&id=5669)<br>
--   [ICES
-    rectangles](https://gis.ices.dk/shapefiles/ICES_rectangles.zip)<br>
+- [Natura2000](https://www.eea.europa.eu/data-and-maps/data/natura-13/natura-2000-spatial-data/natura-2000-shapefile-1)<br>
+- [Country shape](https://www.diva-gis.org/datadown)<br>
+- [Economic Exclusive
+  zone](https://marineregions.org/gazetteer.php?p=details&id=5669)<br>
+- [ICES
+  rectangles](https://gis.ices.dk/shapefiles/ICES_rectangles.zip)<br>
 
 The goal is provide easy access to shapefiles of the North Sea
 
@@ -163,6 +163,18 @@ ggplot2::ggplot()+
 
 <img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
 
+## Using both SPA and SCA
+
+``` r
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = German_natura, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  ggplot2::geom_sf(data = German_SCA, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+
 ## Human activities
 
 ### Shipping lines
@@ -182,7 +194,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
 
 ### Wind Farms
 
@@ -203,7 +215,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-21-1.png" width="100%" />
 
 #### EMODnet
 
@@ -223,7 +235,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-22-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
 
 # Maps
 
@@ -274,7 +286,7 @@ ggplot() +
 #> generated.
 ```
 
-<img src="man/figures/README-unnamed-chunk-25-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
 
 ### ICES rectangles
 
@@ -332,7 +344,7 @@ ggplot(ICES_rectangles)+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-29-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-30-1.png" width="100%" />
 
 ## Protected areas
 
@@ -374,7 +386,7 @@ ggplot(German_natura) +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-32-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-33-1.png" width="100%" />
 
 ## Human activities
 
@@ -397,7 +409,7 @@ ggplot(OWF_EMODnet)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-34-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-35-1.png" width="100%" />
 
 ### Shipping lines
 
@@ -418,7 +430,7 @@ ggplot(German_Shipping)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-36-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-37-1.png" width="100%" />
 
 ### Shipping intensity
 
@@ -468,25 +480,25 @@ ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-39-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
 
 # Other sources
 
--   [Marine Spatial
-    Planning](https://www.bsh.de/EN/TOPICS/Offshore/Maritime_spatial_planning/maritime_spatial_planning_node.html)
+- [Marine Spatial
+  Planning](https://www.bsh.de/EN/TOPICS/Offshore/Maritime_spatial_planning/maritime_spatial_planning_node.html)
 
--   [Shipping
-    intensity](https://www.emodnet-humanactivities.eu/download-data.php)
+- [Shipping
+  intensity](https://www.emodnet-humanactivities.eu/download-data.php)
 
--   [Marine
-    Traffic](https://www.marinetraffic.com/en/ais/home/centerx:8.6/centery:53.9/zoom:9)
+- [Marine
+  Traffic](https://www.marinetraffic.com/en/ais/home/centerx:8.6/centery:53.9/zoom:9)
 
--   [Offshore wind farms](https://map.4coffshore.com/offshorewind/)
+- [Offshore wind farms](https://map.4coffshore.com/offshorewind/)
 
--   [Windkraftanlagen](https://commons.wikimedia.org/wiki/File:Karte_Offshore-Windkraftanlagen_in_der_Deutschen_Bucht.png)
+- [Windkraftanlagen](https://commons.wikimedia.org/wiki/File:Karte_Offshore-Windkraftanlagen_in_der_Deutschen_Bucht.png)
 
--   [GEBCO](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
+- [GEBCO](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
 
--   [NOAA-GRIDDAP-GLOBAL](https://erddap.ifremer.fr/erddap/griddap/index.html?page=1&itemsPerPage=1000)
+- [NOAA-GRIDDAP-GLOBAL](https://erddap.ifremer.fr/erddap/griddap/index.html?page=1&itemsPerPage=1000)
 
--   [COPERNICUS](https://resources.marine.copernicus.eu/products)
+- [COPERNICUS](https://resources.marine.copernicus.eu/products)
