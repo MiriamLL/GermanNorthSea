@@ -239,6 +239,45 @@ ggplot2::ggplot()+
 
 ### 10x10
 
+```{r, eval=FALSE, echo=FALSE}
+# Packages
+library(tidyverse)
+library(sf)
+
+# Create limits
+my_data<-data.frame(Longitude=c(3790000,4250000),
+Latitude=c(3350000,3680000)
+)
+
+# Tranform to CRS
+my_points<-my_data %>%
+  st_as_sf(coords=c('Longitude','Latitude'),
+           #crs=4326,
+           crs=3035,
+           remove=FALSE)
+
+my_grid<-st_make_grid(my_points, 
+                       c(10000, 10000), 
+                       what = "polygons",
+                       square = TRUE)
+# Add id per grid
+my_grid_sf = st_sf(my_grid) %>%
+  dplyr::mutate(grid_id = 1:length(lengths(my_grid)))
+
+# Check grid
+ggplot()+
+  geom_sf(data=my_grid, colour = "black", fill= '#56C1D5', lwd = 0.5)
+
+# Asign CRS
+grid10x10_3035<-my_grid_sf
+
+# Export
+#st_write(my_grid,"C:/Users/lerma/OneDrive/Documents/04Laboral/2023/01MarBird/2023/Overlaps/02Jun/1Data/03GIS/10x10grid_3035c.shp")
+
+# rdata
+save(grid10x10_3035, file = "grid10x10_3035.RData", version = 2)
+```
+
 ```{r}
 grid10x10_3035<-grid10x10_3035
 ```
