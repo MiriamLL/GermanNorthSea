@@ -237,11 +237,73 @@ ggplot2::ggplot()+
 
 <img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
 
-# Maps
+## Grids
+
+This grids were created in R and are made available by this package.
+
+To cite: Lerma, M (2023) German North Sea package.
 
 ``` r
 library(ggplot2)
 #> Warning: package 'ggplot2' was built under R version 4.2.3
+library(ggspatial)
+```
+
+### 5x5
+
+``` r
+grid5x5_3035<-grid5x5_3035
+```
+
+``` r
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data=grid5x5_3035, colour = "black", fill= '#56C1D5', lwd = 0.5)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
+
+### 10x10
+
+``` r
+grid10x10_3035<-grid10x10_3035
+```
+
+``` r
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data=grid10x10_3035, colour = "black", fill= '#56C1D5', lwd = 0.5)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-28-1.png" width="100%" />
+
+``` r
+ggplot() +
+  geom_sf(data = German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
+  geom_sf(data = German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  ggplot2::geom_sf(data=grid10x10_3035, colour = "black", fill= '#56C1D5', lwd = 0.5, alpha=0.1)+
+    xlab('Longitude')+ylab('Latitude')+
+  
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=1.5))+
+  
+  coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+#> Warning: The `size` argument of `element_rect()` is deprecated as of ggplot2 3.4.0.
+#> ℹ Please use the `linewidth` argument instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
+```
+
+<img src="man/figures/README-unnamed-chunk-29-1.png" width="100%" />
+
+# Maps
+
+``` r
+library(ggplot2)
 library(ggspatial)
 ```
 
@@ -279,14 +341,9 @@ ggplot() +
   
   coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
-#> Warning: The `size` argument of `element_rect()` is deprecated as of ggplot2 3.4.0.
-#> ℹ Please use the `linewidth` argument instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
 ```
 
-<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-32-1.png" width="100%" />
 
 ### ICES rectangles
 
@@ -344,7 +401,7 @@ ggplot(ICES_rectangles)+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-30-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-36-1.png" width="100%" />
 
 ## Protected areas
 
@@ -386,7 +443,7 @@ ggplot(German_natura) +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-33-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-39-1.png" width="100%" />
 
 ## Human activities
 
@@ -409,7 +466,7 @@ ggplot(OWF_EMODnet)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-35-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-41-1.png" width="100%" />
 
 ### Shipping lines
 
@@ -430,7 +487,7 @@ ggplot(German_Shipping)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-37-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-43-1.png" width="100%" />
 
 ### Shipping intensity
 
@@ -480,7 +537,7 @@ ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-46-1.png" width="100%" />
 
 # Other sources
 

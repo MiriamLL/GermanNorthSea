@@ -162,10 +162,6 @@ ggplot2::ggplot()+
 ```
 
 
-
-
-
-
 ## Human activities
 ### Shipping lines
 
@@ -218,6 +214,56 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
+## Grids
+
+This grids were created in R and are made available by this package.
+
+To cite: Lerma, M (2023) German North Sea package. 
+
+```{r}
+library(ggplot2)
+library(ggspatial)
+```
+### 5x5
+
+```{r}
+grid5x5_3035<-grid5x5_3035
+```
+
+```{r}
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data=grid5x5_3035, colour = "black", fill= '#56C1D5', lwd = 0.5)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+### 10x10
+
+```{r}
+grid10x10_3035<-grid10x10_3035
+```
+
+```{r}
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data=grid10x10_3035, colour = "black", fill= '#56C1D5', lwd = 0.5)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+
+```{r}
+ggplot() +
+  geom_sf(data = German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
+  geom_sf(data = German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  ggplot2::geom_sf(data=grid10x10_3035, colour = "black", fill= '#56C1D5', lwd = 0.5, alpha=0.1)+
+    xlab('Longitude')+ylab('Latitude')+
+  
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=1.5))+
+  
+  coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
 
 # Maps
 
