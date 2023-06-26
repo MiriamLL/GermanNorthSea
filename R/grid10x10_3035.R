@@ -7,4 +7,4 @@
 #' @references Lerma et al. 2023
 #' @examples
 #' data(grid10x10_3035)
-"grid510x10_3035"
+"grid10x10_3035"
