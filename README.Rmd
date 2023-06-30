@@ -304,6 +304,50 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
+
+
+## Grid 10x10 EEZ
+
+```{r, eval=FALSE, echo=FALSE}
+# Package
+library(GermanNorthSea)
+library(tidyverse)
+library(sf)
+# Shapefiles
+Grid_10km<-grid10x10_3035
+Grid_10km_EEZ <- sf::st_intersection(Grid_10km, German_EEZ)
+## With data
+## Create data frame of grids with data by dropping geometry
+Grid_names<-Grid_10km_EEZ %>% 
+  st_drop_geometry()
+## Select column with grid_id
+Grid_names<-Grid_names %>%
+  select(grid_id,OBJECTID)
+## Grid inside EEZ
+Grid_10km_keep<-merge(Grid_10km,Grid_names,by='grid_id',all=TRUE)
+## Keep only with data
+Grid_10km_keep<- Grid_10km_keep[stats::complete.cases(Grid_10km_keep$OBJECTID),]
+# Asign name
+grid10x10_EEZ<-Grid_10km_keep
+# rdata
+save(grid10x10_EEZ, file = "grid10x10_EEZ.RData", version = 2)
+
+##devtools::document()
+##devtools::check()
+```
+
+```{r}
+grid10x10_EEZ<-grid10x10_EEZ
+```
+
+```{r}
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data=grid10x10_EEZ, colour = "black", fill= '#56C1D5', lwd = 0.5)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+
 # Maps
 
 ```{r}

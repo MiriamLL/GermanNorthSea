@@ -300,6 +300,21 @@ ggplot() +
 
 <img src="man/figures/README-unnamed-chunk-30-1.png" width="100%" />
 
+## Grid 10x10 EEZ
+
+``` r
+grid10x10_EEZ<-grid10x10_EEZ
+```
+
+``` r
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data=grid10x10_EEZ, colour = "black", fill= '#56C1D5', lwd = 0.5)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-33-1.png" width="100%" />
+
 # Maps
 
 ``` r
@@ -343,7 +358,7 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-33-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-36-1.png" width="100%" />
 
 ### ICES rectangles
 
@@ -401,7 +416,7 @@ ggplot(ICES_rectangles)+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-37-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
 
 ## Protected areas
 
@@ -443,7 +458,7 @@ ggplot(German_natura) +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-43-1.png" width="100%" />
 
 ## Human activities
 
@@ -466,7 +481,7 @@ ggplot(OWF_EMODnet)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-45-1.png" width="100%" />
 
 ### Shipping lines
 
@@ -487,7 +502,7 @@ ggplot(German_Shipping)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-44-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-47-1.png" width="100%" />
 
 ### Shipping intensity
 
@@ -537,7 +552,7 @@ ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-47-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-50-1.png" width="100%" />
 
 # Other sources
 
