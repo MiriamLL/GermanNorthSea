@@ -245,7 +245,6 @@ To cite: Lerma, M (2023) German North Sea package.
 
 ``` r
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 4.2.3
 library(ggspatial)
 ```
 
@@ -364,12 +363,6 @@ ggplot() +
 
 ``` r
 library(tidyverse)
-#> Warning: package 'tidyverse' was built under R version 4.2.3
-#> Warning: package 'tibble' was built under R version 4.2.3
-#> Warning: package 'readr' was built under R version 4.2.3
-#> Warning: package 'dplyr' was built under R version 4.2.3
-#> Warning: package 'forcats' was built under R version 4.2.3
-#> Warning: package 'lubridate' was built under R version 4.2.3
 ```
 
 ``` r
@@ -513,7 +506,12 @@ package **sf**.
 
 ``` r
 library(sf)
-#> Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.3.1; sf_use_s2() is TRUE
+```
+
+``` r
+library(GermanNorthSea)
+library(ggspatial)
 ```
 
 ``` r
@@ -552,7 +550,107 @@ ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-50-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-51-1.png" width="100%" />
+
+#### GEBCO Bathymetry
+
+To download [GEBCO: General Bathymetry Chart of the
+Oceans](https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area)
+
+Go to: Download data for user-defined areas Use the application. Add
+your coordinates here I use 1 to 10 and 50 to 60. Add to basket and
+download.
+
+<https://download.gebco.net/>
+
+``` r
+library(here)
+#> here() starts at C:/Users/lerma/OneDrive/Documents/03Academico/02Proyectos-Postdoc/2024/1Programming/2Packages/GermanNorthSea
+here()
+#> [1] "C:/Users/lerma/OneDrive/Documents/03Academico/02Proyectos-Postdoc/2024/1Programming/2Packages/GermanNorthSea"
+this_folder<-paste0(here(),"/data")
+list.files(this_folder)
+#>  [1] "gebco_2024_n60.0_s50.0_w1.0_e9.0.tif"
+#>  [2] "GEBCO_Grid_documentation.pdf"        
+#>  [3] "GEBCO_Grid_terms_of_use.pdf"         
+#>  [4] "German_coast.rda"                    
+#>  [5] "German_EEZ.rda"                      
+#>  [6] "German_ICES.rda"                     
+#>  [7] "German_land.rda"                     
+#>  [8] "German_natura.rda"                   
+#>  [9] "German_OWF.rda"                      
+#> [10] "German_SCA.rda"                      
+#> [11] "German_Shipping.rda"                 
+#> [12] "Germany.rda"                         
+#> [13] "grid10x10_3035.RData"                
+#> [14] "grid10x10_EEZ.RData"                 
+#> [15] "grid5x5_3035.RData"                  
+#> [16] "OWF_EMODnet.rda"
+```
+
+``` r
+this_file<-paste0(this_folder,"/gebco_2024_n60.0_s50.0_w1.0_e9.0.tif")
+this_file
+#> [1] "C:/Users/lerma/OneDrive/Documents/03Academico/02Proyectos-Postdoc/2024/1Programming/2Packages/GermanNorthSea/data/gebco_2024_n60.0_s50.0_w1.0_e9.0.tif"
+```
+
+Use the [terra
+package](https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure.html)
+
+``` r
+library(terra)
+#> terra 1.7.78
+#> 
+#> Attaching package: 'terra'
+#> The following object is masked from 'package:tidyr':
+#> 
+#>     extract
+```
+
+``` r
+Bath<-rast(this_file)
+```
+
+``` r
+Bath_df <- as.data.frame(Bath, xy = TRUE)
+```
+
+``` r
+library(tidyverse)
+```
+
+``` r
+Bath_subset<-Bath_df %>%
+  filter(x > 2 & x < 10)%>%
+  filter(y > 52 & y < 57)%>%
+  rename(Bathymetry=3) %>%
+  filter(Bathymetry < 10)
+```
+
+``` r
+library(ggplot2)
+```
+
+``` r
+ggplot() +
+  geom_raster(data = Bath_subset, aes(x = x, y = y, fill = Bathymetry)) +
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  scale_fill_viridis_c(option = "mako")+
+  theme_void()+
+  theme(legend.position='bottom')+
+  xlab('Longitude')+ylab('Latitude')+
+  coord_sf(xlim = c(3,9), ylim = c(53,56),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-60-1.png" width="100%" />
+
+Do not forget to cite:
+
+If the data sets are used in a presentation or publication then we ask
+that you acknowledge the source.This should be of the form: GEBCO
+Compilation Group (2024) GEBCO 2024 Grid
+(<doi:10.5285/1c44ce99-0a0d-5f4f-e063-7086abc0ea0f>)
 
 # Other sources
 

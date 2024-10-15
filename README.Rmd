@@ -214,6 +214,11 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
+
+
+
+
+
 ## Grids
 
 This grids were created in R and are made available by this package.
@@ -536,6 +541,11 @@ library(sf)
 ```
 
 ```{r}
+library(GermanNorthSea)
+library(ggspatial)
+```
+
+```{r}
 German_EEZ<-st_transform(German_EEZ, 4326)
 German_coast<-st_transform(German_coast, 4326)
 German_land<-st_transform(German_land, 4326)
@@ -570,6 +580,78 @@ ggplot()+
   coord_sf(xlim = c(3,9), ylim = c(53,56),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
+
+#### GEBCO Bathymetry
+
+To download [GEBCO: General Bathymetry Chart of the Oceans](https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area)
+
+Go to: Download data for user-defined areas
+Use the application.
+Add your coordinates here I use 1 to 10 and 50 to 60.
+Add to basket and download.
+
+https://download.gebco.net/
+
+
+```{r}
+library(here)
+here()
+this_folder<-paste0(here(),"/data")
+list.files(this_folder)
+```
+
+```{r}
+this_file<-paste0(this_folder,"/gebco_2024_n60.0_s50.0_w1.0_e9.0.tif")
+this_file
+```
+
+Use the [terra package](https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure.html)
+
+```{r}
+library(terra)
+```
+
+```{r}
+Bath<-rast(this_file)
+```
+
+```{r}
+Bath_df <- as.data.frame(Bath, xy = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+Bath_subset<-Bath_df %>%
+  filter(x > 2 & x < 10)%>%
+  filter(y > 52 & y < 57)%>%
+  rename(Bathymetry=3) %>%
+  filter(Bathymetry < 10)
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+ggplot() +
+  geom_raster(data = Bath_subset, aes(x = x, y = y, fill = Bathymetry)) +
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  scale_fill_viridis_c(option = "mako")+
+  theme_void()+
+  theme(legend.position='bottom')+
+  xlab('Longitude')+ylab('Latitude')+
+  coord_sf(xlim = c(3,9), ylim = c(53,56),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+
+```
+
+Do not forget to cite:
+
+If the data sets are used in a presentation or publication then we ask that you acknowledge the source.This should be of the form:
+GEBCO Compilation Group (2024) GEBCO 2024 Grid (doi:10.5285/1c44ce99-0a0d-5f4f-e063-7086abc0ea0f)
 
 # Other sources
 
