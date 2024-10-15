@@ -563,37 +563,6 @@ download.
 
 <https://download.gebco.net/>
 
-``` r
-library(here)
-#> here() starts at C:/Users/lerma/OneDrive/Documents/03Academico/02Proyectos-Postdoc/2024/1Programming/2Packages/GermanNorthSea
-here()
-#> [1] "C:/Users/lerma/OneDrive/Documents/03Academico/02Proyectos-Postdoc/2024/1Programming/2Packages/GermanNorthSea"
-this_folder<-paste0(here(),"/data")
-list.files(this_folder)
-#>  [1] "gebco_2024_n60.0_s50.0_w1.0_e9.0.tif"
-#>  [2] "GEBCO_Grid_documentation.pdf"        
-#>  [3] "GEBCO_Grid_terms_of_use.pdf"         
-#>  [4] "German_coast.rda"                    
-#>  [5] "German_EEZ.rda"                      
-#>  [6] "German_ICES.rda"                     
-#>  [7] "German_land.rda"                     
-#>  [8] "German_natura.rda"                   
-#>  [9] "German_OWF.rda"                      
-#> [10] "German_SCA.rda"                      
-#> [11] "German_Shipping.rda"                 
-#> [12] "Germany.rda"                         
-#> [13] "grid10x10_3035.RData"                
-#> [14] "grid10x10_EEZ.RData"                 
-#> [15] "grid5x5_3035.RData"                  
-#> [16] "OWF_EMODnet.rda"
-```
-
-``` r
-this_file<-paste0(this_folder,"/gebco_2024_n60.0_s50.0_w1.0_e9.0.tif")
-this_file
-#> [1] "C:/Users/lerma/OneDrive/Documents/03Academico/02Proyectos-Postdoc/2024/1Programming/2Packages/GermanNorthSea/data/gebco_2024_n60.0_s50.0_w1.0_e9.0.tif"
-```
-
 Use the [terra
 package](https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure.html)
 
@@ -608,23 +577,26 @@ library(terra)
 ```
 
 ``` r
-Bath<-rast(this_file)
+Bath_file<-rast(this_file)
 ```
 
 ``` r
-Bath_df <- as.data.frame(Bath, xy = TRUE)
+Bath_dataframe <- as.data.frame(Bath_file, xy = TRUE)
+```
+
+# Alternatively
+
+``` r
+Bath_dataframe<-GermanNorthSea::German_bath
 ```
 
 ``` r
-library(tidyverse)
-```
-
-``` r
-Bath_subset<-Bath_df %>%
+Bath_dataframe_sub <-Bath_dataframe  %>%
   filter(x > 2 & x < 10)%>%
   filter(y > 52 & y < 57)%>%
   rename(Bathymetry=3) %>%
-  filter(Bathymetry < 10)
+  filter(Bathymetry < 10)%>%
+  mutate(Bathymetry = as.numeric(Bathymetry))
 ```
 
 ``` r
@@ -633,7 +605,24 @@ library(ggplot2)
 
 ``` r
 ggplot() +
-  geom_raster(data = Bath_subset, aes(x = x, y = y, fill = Bathymetry)) +
+  geom_raster(data = Bath_dataframe_sub , aes(x = x, y = y, fill = Bathymetry)) +
+  scale_fill_viridis_c(option = "mako")+
+  theme_void()+
+  theme(legend.position='bottom')+
+  xlab('Longitude')+ylab('Latitude')+
+  coord_sf(xlim = c(3,9), ylim = c(53,56),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-59-1.png" width="100%" />
+
+``` r
+German_land<-st_transform(German_land, 4326)
+```
+
+``` r
+ggplot() +
+  geom_raster(data = Bath_dataframe_sub , aes(x = x, y = y, fill = Bathymetry)) +
   geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
   scale_fill_viridis_c(option = "mako")+
   theme_void()+
@@ -643,7 +632,7 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-60-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-61-1.png" width="100%" />
 
 Do not forget to cite:
 

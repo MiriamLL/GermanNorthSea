@@ -593,14 +593,11 @@ Add to basket and download.
 https://download.gebco.net/
 
 
-```{r}
+```{r, include=FALSE}
 library(here)
 here()
 this_folder<-paste0(here(),"/data")
 list.files(this_folder)
-```
-
-```{r}
 this_file<-paste0(this_folder,"/gebco_2024_n60.0_s50.0_w1.0_e9.0.tif")
 this_file
 ```
@@ -612,23 +609,26 @@ library(terra)
 ```
 
 ```{r}
-Bath<-rast(this_file)
+Bath_file<-rast(this_file)
 ```
 
 ```{r}
-Bath_df <- as.data.frame(Bath, xy = TRUE)
+Bath_dataframe <- as.data.frame(Bath_file, xy = TRUE)
+```
+
+# Alternatively
+
+```{r}
+Bath_dataframe<-GermanNorthSea::German_bath
 ```
 
 ```{r}
-library(tidyverse)
-```
-
-```{r}
-Bath_subset<-Bath_df %>%
+Bath_dataframe_sub <-Bath_dataframe  %>%
   filter(x > 2 & x < 10)%>%
   filter(y > 52 & y < 57)%>%
   rename(Bathymetry=3) %>%
-  filter(Bathymetry < 10)
+  filter(Bathymetry < 10)%>%
+  mutate(Bathymetry = as.numeric(Bathymetry))
 ```
 
 ```{r}
@@ -637,7 +637,24 @@ library(ggplot2)
 
 ```{r}
 ggplot() +
-  geom_raster(data = Bath_subset, aes(x = x, y = y, fill = Bathymetry)) +
+  geom_raster(data = Bath_dataframe_sub , aes(x = x, y = y, fill = Bathymetry)) +
+  scale_fill_viridis_c(option = "mako")+
+  theme_void()+
+  theme(legend.position='bottom')+
+  xlab('Longitude')+ylab('Latitude')+
+  coord_sf(xlim = c(3,9), ylim = c(53,56),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+
+```
+
+
+```{r}
+German_land<-st_transform(German_land, 4326)
+```
+
+```{r}
+ggplot() +
+  geom_raster(data = Bath_dataframe_sub , aes(x = x, y = y, fill = Bathymetry)) +
   geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
   scale_fill_viridis_c(option = "mako")+
   theme_void()+
