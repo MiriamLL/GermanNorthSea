@@ -656,6 +656,75 @@ Do not forget to cite:
 If the data sets are used in a presentation or publication then we ask that you acknowledge the source.This should be of the form:
 GEBCO Compilation Group (2024) GEBCO 2024 Grid (doi:10.5285/1c44ce99-0a0d-5f4f-e063-7086abc0ea0f)
 
+# Distance to coast
+
+Source: [OceanColor NASA](https://oceancolor.gsfc.nasa.gov/resources/docs/distfromcoast/)
+I recommend to download **the interpolated 0.01-degree GeoTiff packed together with a brief description file.**
+
+```{r, include=FALSE, eval=FALSE}
+library(here)
+here()
+this_folder<-paste0(here(),"/data")
+list.files(this_folder)
+this_file<-paste0(this_folder,"/GMT_intermediate_coast_distance_01d.tif")
+this_file
+```
+
+```{r, include=FALSE, eval=FALSE}
+library(terra)
+DistCoast_file<-rast(this_file)
+DistCoast_dataframe <- as.data.frame(DistCoast_file, xy = TRUE)
+beepr::beep(sound=1)
+```
+
+```{r, eval=FALSE}
+library(tidyverse)
+DistCoast_dataframe_sub <-DistCoast_dataframe  %>%
+  filter(x > 2 & x < 10)%>%
+  filter(y > 52 & y < 57)%>%
+  rename(Dist=3) %>%
+  mutate(Dist = as.numeric(Dist))
+beepr::beep(sound=1)
+```
+
+```{r, echo=FALSE, eval=FALSE}
+German_distancecoast<-DistCoast_dataframe_sub
+save(German_distancecoast, file="German_distancecoast.rda")
+devtools::document()
+devtools::check()
+```
+
+Alternatively
+
+```{r}
+DistCoast_dataframe<-GermanNorthSea::German_distancecoast
+```
+
+```{r}
+library(sf)
+```
+
+```{r}
+German_land<-st_transform(GermanNorthSea::German_land, 4326)
+```
+
+```{r}
+DistCoast_dataframe_sub<-DistCoast_dataframe %>%
+  filter(Dist > -20)
+```
+
+```{r}
+ggplot() +
+  geom_raster(data = DistCoast_dataframe_sub, aes(x = x, y = y, fill = Dist)) +
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  scale_fill_viridis_c(option = "rocket")+
+  theme_void()+
+  theme(legend.position='bottom')+
+  xlab('Longitude')+ylab('Latitude')+
+  coord_sf(xlim = c(3,9), ylim = c(53,56),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
 # Other sources
 
 - [Marine Spatial Planning](https://www.bsh.de/EN/TOPICS/Offshore/Maritime_spatial_planning/maritime_spatial_planning_node.html)
