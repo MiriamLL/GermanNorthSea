@@ -14,7 +14,7 @@ This package contains shapefiles from the **German North Sea**: <br>
 
 The goal is provide easy access to shapefiles of the North Sea
 
-All shapefiles are in CRS 3035.
+Most shapefiles are in CRS 3035.
 
 ## Installation
 
@@ -552,7 +552,7 @@ ggplot()+
 
 <img src="man/figures/README-unnamed-chunk-51-1.png" width="100%" />
 
-#### GEBCO Bathymetry
+# GEBCO Bathymetry
 
 To download [GEBCO: General Bathymetry Chart of the
 Oceans](https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area)
@@ -584,7 +584,7 @@ Bath_file<-rast(this_file)
 Bath_dataframe <- as.data.frame(Bath_file, xy = TRUE)
 ```
 
-# Alternatively
+Alternatively
 
 ``` r
 Bath_dataframe<-GermanNorthSea::German_bath
@@ -604,19 +604,6 @@ library(ggplot2)
 ```
 
 ``` r
-ggplot() +
-  geom_raster(data = Bath_dataframe_sub , aes(x = x, y = y, fill = Bathymetry)) +
-  scale_fill_viridis_c(option = "mako")+
-  theme_void()+
-  theme(legend.position='bottom')+
-  xlab('Longitude')+ylab('Latitude')+
-  coord_sf(xlim = c(3,9), ylim = c(53,56),
-                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
-```
-
-<img src="man/figures/README-unnamed-chunk-59-1.png" width="100%" />
-
-``` r
 German_land<-st_transform(German_land, 4326)
 ```
 
@@ -632,7 +619,7 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-61-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-60-1.png" width="100%" />
 
 Do not forget to cite:
 
