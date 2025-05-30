@@ -351,11 +351,11 @@ save(Study_areas, file="Study_areas.rda") #move to folder data
 usethis::use_r("Study_areas") #fill copying other information in the R folder
 ```
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 Study_areas<-GermanNorthSea::Study_areas
 ```
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 library(ggplot2)
 German_land<-st_transform(GermanNorthSea::German_land, 4326)
 German_EEZ<-st_transform(GermanNorthSea::German_EEZ, 4326)
@@ -450,6 +450,10 @@ library(ggspatial)
 ### 6.3.1. Grid 5x5
 
 ```{r}
+library(GermanNorthSea)
+```
+
+```{r}
 grid5x5_3035<-grid5x5_3035
 ```
 
@@ -515,9 +519,9 @@ ggplot2::ggplot()+
 
 ```{r}
 ggplot() +
-  geom_sf(data = German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
-  geom_sf(data = German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
-  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  geom_sf(data = GermanNorthSea::German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
+  geom_sf(data = GermanNorthSea::German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
+  geom_sf(data = GermanNorthSea::German_land, colour = 'black', fill = '#ffffbe')+
   ggplot2::geom_sf(data=grid10x10_3035, colour = "black", fill= '#56C1D5', lwd = 0.5, alpha=0.1)+
     xlab('Longitude')+ylab('Latitude')+
   

@@ -400,7 +400,14 @@ ggplot() +
   annotate(geom = "text", x = 12,  y = 54.5, label = "K",size = 4,fontface = 'bold',color='#343a40')+
   annotate(geom = "text", x = 12.8,y = 54.8, label = "L",size = 4,fontface = 'bold',color='#343a40')+
   annotate(geom = "text", x = 14.2,y = 54.3, label = "O",size = 4,fontface = 'bold',color='#343a40')
+#> Warning: The `size` argument of `element_rect()` is deprecated as of ggplot2 3.4.0.
+#> ℹ Please use the `linewidth` argument instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
+
+<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
 
 ## 6.2. ICES Rectangles
 
@@ -436,6 +443,10 @@ library(ggspatial)
 ### 6.3.1. Grid 5x5
 
 ``` r
+library(GermanNorthSea)
+```
+
+``` r
 grid5x5_3035<-grid5x5_3035
 ```
 
@@ -446,7 +457,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-45-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-46-1.png" width="100%" />
 
 ### 6.3.2. Grid 10x10
 
@@ -461,13 +472,13 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-48-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-49-1.png" width="100%" />
 
 ``` r
 ggplot() +
-  geom_sf(data = German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
-  geom_sf(data = German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
-  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  geom_sf(data = GermanNorthSea::German_EEZ, colour = "red", fill= NA,alpha=0.9, lwd = 0.5)+
+  geom_sf(data = GermanNorthSea::German_coast, colour = "red", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
+  geom_sf(data = GermanNorthSea::German_land, colour = 'black', fill = '#ffffbe')+
   ggplot2::geom_sf(data=grid10x10_3035, colour = "black", fill= '#56C1D5', lwd = 0.5, alpha=0.1)+
     xlab('Longitude')+ylab('Latitude')+
   
@@ -475,14 +486,9 @@ ggplot() +
   
   coord_sf(xlim = c(3900000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
-#> Warning: The `size` argument of `element_rect()` is deprecated as of ggplot2 3.4.0.
-#> ℹ Please use the `linewidth` argument instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
 ```
 
-<img src="man/figures/README-unnamed-chunk-49-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-50-1.png" width="100%" />
 
 ### 6.3.3. Grid 10x10 Only EEZ
 
@@ -497,7 +503,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-52-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-53-1.png" width="100%" />
 
 # 7. Maps with annotations
 
@@ -542,7 +548,7 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-55-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-56-1.png" width="100%" />
 
 ### 7.1.1. ICES rectangles
 
@@ -594,7 +600,7 @@ ggplot(ICES_rectangles)+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-59-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-60-1.png" width="100%" />
 
 ### 7.1.2. Protected areas
 
@@ -636,7 +642,7 @@ ggplot(German_natura) +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-62-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-63-1.png" width="100%" />
 
 ### 7.1.3. Wind Farms
 
@@ -657,7 +663,7 @@ ggplot(OWF_EMODnet)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-64-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-65-1.png" width="100%" />
 
 ### 7.1.4. Shipping lines
 
@@ -678,7 +684,7 @@ ggplot(German_Shipping)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-66-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-67-1.png" width="100%" />
 
 ## 7.2. CRS 4326
 
@@ -730,7 +736,7 @@ ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-70-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-71-1.png" width="100%" />
 
 # 8. Other sources
 
