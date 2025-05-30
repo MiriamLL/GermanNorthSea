@@ -16,7 +16,7 @@ The goal is provide easy access to shapefiles of the North Sea
 
 Most shapefiles are in CRS 3035.
 
-## Installation
+# 1. Installation
 
 ``` r
 # install.packages("devtools")
@@ -27,11 +27,23 @@ devtools::install_github("MiriamLL/GermanNorthSea")
 library(GermanNorthSea)
 ```
 
-# Data
+# 2. Map
 
-## Base Maps
+## 2.1. Europe
 
-### German Land
+``` r
+German_land<-GermanNorthSea::German_land
+```
+
+``` r
+ggplot2::ggplot()+ ggplot2::geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
+## 2.2. Germany
 
 To download go to: [DIVA-GIS](https://www.diva-gis.org/datadown)<br>
 Select the country and Administrative areas.
@@ -46,23 +58,9 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = Germany, colour = 'black', fill = '#f
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
-
-### Europe
-
-``` r
-German_land<-GermanNorthSea::German_land
-```
-
-``` r
-ggplot2::ggplot()+ ggplot2::geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
-  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
-                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
-```
-
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
-### German EEZ
+## 2.3. German EEZ
 
 To download: go to
 [EMODnet](https://www.emodnet-humanactivities.eu/view-data.php)\>Select
@@ -86,7 +84,7 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = German_EEZ,
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
-### German Coast
+## 2.4. German EZZ coast
 
 ``` r
 German_coast<-GermanNorthSea::German_coast
@@ -102,27 +100,9 @@ ggplot2::ggplot()+
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
-### ICES Rectangles
+# 3. Protected areas
 
-Source: [ICES rectangles](https://gis.ices.dk/sf/index.html)<br> To
-download: go to link\> click on **Quick Downloads**\> select ICES
-Statistical Rectangles.
-
-``` r
-German_ICES<-GermanNorthSea::German_ICES
-```
-
-``` r
-ggplot2::ggplot(German_ICES)+ 
-  ggplot2::geom_sf(data = German_ICES, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
-  ggplot2::geom_sf_text(ggplot2::aes(label =ICESNAME),size=3,family="sans")+
-  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
-                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
-```
-
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
-
-### German Natura 2000
+### 3.1. Natura Areas
 
 To download: go to
 [GeoSeaPortal](https://www.geoseaportal.de/atomfeeds/Raumordnungsplan_AWZ_en.xml#download=1.)
@@ -142,7 +122,9 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+
+### 3.2. Special Conservation Areas
 
 Other option is [Europen Environment
 Agency](https://www.eea.europa.eu/data-and-maps/data/natura-14) This
@@ -161,9 +143,9 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
 
-## Using both SPA and SCA
+### 3.3. SPA and SCA
 
 ``` r
 ggplot2::ggplot()+ 
@@ -173,11 +155,11 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
 
-## Human activities
+# 4. Human activities
 
-### Shipping lines
+## 4.1. Shipping lines
 
 To download: go to
 [GeoSeaPortal](https://www.geoseaportal.de/atomfeeds/Raumordnungsplan_AWZ_en.xml#download=1.)
@@ -194,11 +176,11 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
 
-### Wind Farms
+## 4.2. Wind Farms
 
-#### BfN
+### 4.2.1. BfN
 
 To download: go to
 [GeoSeaPortal](https://www.geoseaportal.de/atomfeeds/Raumordnungsplan_AWZ_en.xml#download=1.)
@@ -215,9 +197,9 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-21-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
 
-#### EMODnet
+### 4.2.2. EMODnet
 
 To download: Go to
 [EMBO](https://www.emodnet-humanactivities.eu/view-data.php). Select
@@ -235,9 +217,212 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-21-1.png" width="100%" />
 
-## Grids
+# 5. Environmental variables
+
+## 5.1. Bathymetry
+
+To download [GEBCO: General Bathymetry Chart of the
+Oceans](https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area)
+
+Go to: [Download](https://download.gebco.net/) data for user-defined
+areas Use the application. Add your coordinates here I use 1 to 10 and
+50 to 60. Add to basket and download.
+
+For steps to manipulate the data check my
+[blogpost](https://www.miriam-lerma.com/posts/2025-01-15-bathymetry/)
+
+Reference: If the data sets are used in a presentation or publication
+then we ask that you acknowledge the source.This should be of the form:
+GEBCO Compilation Group (2024) GEBCO 2024 Grid
+(<doi:10.5285/1c44ce99-0a0d-5f4f-e063-7086abc0ea0f>)
+
+``` r
+Bath_dataframe<-GermanNorthSea::German_bath
+```
+
+``` r
+library(tidyverse)
+Bath_dataframe_sub <-Bath_dataframe  %>%
+  filter(x > 2 & x < 10)%>%
+  filter(y > 52 & y < 57)%>%
+  rename(Bathymetry=3) %>%
+  filter(Bathymetry < 10)%>%
+  mutate(Bathymetry = as.numeric(Bathymetry))
+```
+
+``` r
+library(sf)
+#> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.3.1; sf_use_s2() is TRUE
+German_land<-st_transform(German_land, 4326)
+```
+
+``` r
+library(ggplot2)
+ggplot() +
+  geom_raster(data = Bath_dataframe_sub , aes(x = x, y = y, fill = Bathymetry)) +
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  scale_fill_viridis_c(option = "mako")+
+  theme_void()+
+  theme(legend.position='bottom')+
+  xlab('Longitude')+ylab('Latitude')+
+  coord_sf(xlim = c(3,9), ylim = c(53,56),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
+
+Reference: If the data sets are used in a presentation or publication
+then we ask that you acknowledge the source.This should be of the form:
+GEBCO Compilation Group (2024) GEBCO 2024 Grid
+(<doi:10.5285/1c44ce99-0a0d-5f4f-e063-7086abc0ea0f>)
+
+## 5.2. Distance to coast
+
+Source: [OceanColor
+NASA](https://oceancolor.gsfc.nasa.gov/resources/docs/distfromcoast/) I
+recommend to download **the interpolated 0.01-degree GeoTiff packed
+together with a brief description file.** For steps to manipulate the
+data check my
+[blogpost](https://www.miriam-lerma.com/posts/2025-02-15-distancetocoast/)
+
+``` r
+DistCoast_dataframe<-GermanNorthSea::German_distancecoast
+```
+
+``` r
+library(sf)
+```
+
+``` r
+German_land<-st_transform(GermanNorthSea::German_land, 4326)
+```
+
+``` r
+DistCoast_dataframe_sub<-DistCoast_dataframe %>%
+  filter(Dist > -20)
+```
+
+``` r
+ggplot() +
+  geom_raster(data = DistCoast_dataframe_sub, aes(x = x, y = y, fill = Dist)) +
+  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
+  scale_fill_viridis_c(option = "rocket")+
+  theme_void()+
+  theme(legend.position='bottom')+
+  xlab('Longitude')+ylab('Latitude')+
+  coord_sf(xlim = c(3,9), ylim = c(53,56),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-35-1.png" width="100%" />
+
+# 6. Zonification
+
+## 6.1. Study Area
+
+Based on the occurrence of marine animals, the sea areas of the German
+North Sea and Baltic Sea were divided into study areas, which were then
+surveyed using specific transect designs.
+
+Source:
+[BfN](https://nokis.mdi-de-dienste.org/trefferanzeige?docuuid=57fbad61-2960-4fe1-bd28-291894d02c94)
+
+Reference: Dieser Dienst und die darin verfügbaren Daten können gemäß
+der ‘Nutzungsbestimmungen für die Bereitstellung von Geodaten des
+Bundes’
+(<http://www.gesetze-im-internet.de/bundesrecht/geonutzv/gesamt.pdf>)
+genutzt werden. Quelle: Bundesamt für Naturschutz (BfN) Jahr.
+
+``` r
+Study_areas<-GermanNorthSea::Study_areas
+```
+
+``` r
+library(ggplot2)
+German_land<-st_transform(GermanNorthSea::German_land, 4326)
+German_EEZ<-st_transform(GermanNorthSea::German_EEZ, 4326)
+German_coast<-st_transform(GermanNorthSea::German_coast, 4326)
+ggplot() +  
+   geom_sf(data = German_EEZ, colour = "black", fill= '#caf0f8', lwd = 0.5)+
+  
+  geom_sf(data = Study_areas, color='black',fill = '#caf0f8', lwd = 0.5)+
+  
+  geom_sf(data = Study_areas, aes(fill=stratum),colour = 'transparent')+
+  scale_fill_manual(values = c(A = '#7400b8',B = '#6930c3',C = '#5e60ce',D = '#277da1',E = '#577590',F = '#4d908e',
+                               G = '#43aa8b',H = '#90be6d',I = '#f9c74f',J = '#ff6d00',K = '#f8961e',L = '#f3722c',
+                               N = '#f94144'))+
+  
+  # Fill colors
+ 
+ 
+  # Line colors
+  geom_sf(data = German_EEZ, colour = "black", fill= NA, lwd = 0.5)+
+  geom_sf(data = German_coast, colour = "black", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
+  geom_sf(data = German_land, colour = '#d9d9d9', fill = '#d9d9d9')+
+  
+  geom_sf(data = German_coast, colour = "black", fill= NA,alpha=0.9, lwd = 0.5,linetype="dashed")+
+  
+  coord_sf(xlim = c(3, 15),ylim = c(53, 56))+
+  scale_x_continuous(breaks = c(5,7,9,11,13,15),labels = function(x) paste0(x, '\u00B0', "W")) +
+  scale_y_continuous(breaks = c(53.5,54.5,55.5,56.5),labels = function(x) paste0(x, '\u00B0', "N"))+
+  
+  theme(
+  legend.position='none',
+  legend.spacing.y = unit(0.05, 'cm'),
+  legend.text=element_text(size=10),
+  legend.background = element_rect(fill='transparent',colour ="transparent"),
+  legend.box.background = element_rect(fill='transparent',colour ="transparent"),
+  legend.key = element_rect(fill = "transparent", colour = "transparent"),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill = "transparent"))+
+  
+  xlab('Longitude')+ylab('Latitude')+
+  
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=1.5))+
+  
+  theme(axis.text.x = element_text(size=10,vjust = 15),
+        axis.text.y = element_text(size=10,margin = margin(0,-1.50,0,1, unit = 'cm')),
+        axis.title = element_blank(),
+        axis.ticks.length=unit(-0.25, "cm"))+
+  annotate(geom = "text", x = 4.5, y = 55.5, label = "A",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 5.5, y = 55.3, label = "B",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 6.8, y = 55.0, label = "C",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 7.9, y = 54.8, label = "D",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 8.1, y = 54.1, label = "E",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 7.1, y = 54.1, label = "F",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 6.4, y = 54.5, label = "G",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 5.5, y = 54.8, label = "H",size = 4,fontface = 'bold',color='#343a40')+  
+  annotate(geom = "text", x = 10.3,y = 54.8, label = "I",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 11,  y = 54.6, label = "J",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 12,  y = 54.5, label = "K",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 12.8,y = 54.8, label = "L",size = 4,fontface = 'bold',color='#343a40')+
+  annotate(geom = "text", x = 14.2,y = 54.3, label = "O",size = 4,fontface = 'bold',color='#343a40')
+```
+
+## 6.2. ICES Rectangles
+
+Source: [ICES rectangles](https://gis.ices.dk/sf/index.html)<br> To
+download: go to link\> click on **Quick Downloads**\> select ICES
+Statistical Rectangles.
+
+``` r
+German_ICES<-GermanNorthSea::German_ICES
+```
+
+``` r
+ggplot2::ggplot(German_ICES)+ 
+  ggplot2::geom_sf(data = German_ICES, colour = "#3d6d22", fill= '#3d6d22',alpha=0.2, lwd = 1)+
+  ggplot2::geom_sf_text(ggplot2::aes(label =ICESNAME),size=3,family="sans")+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-42-1.png" width="100%" />
+
+## 6.3. Grids
 
 This grids were created in R and are made available by this package.
 
@@ -248,7 +433,7 @@ library(ggplot2)
 library(ggspatial)
 ```
 
-### 5x5
+### 6.3.1. Grid 5x5
 
 ``` r
 grid5x5_3035<-grid5x5_3035
@@ -261,9 +446,9 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-45-1.png" width="100%" />
 
-### 10x10
+### 6.3.2. Grid 10x10
 
 ``` r
 grid10x10_3035<-grid10x10_3035
@@ -276,7 +461,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-29-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-48-1.png" width="100%" />
 
 ``` r
 ggplot() +
@@ -297,9 +482,9 @@ ggplot() +
 #> generated.
 ```
 
-<img src="man/figures/README-unnamed-chunk-30-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-49-1.png" width="100%" />
 
-## Grid 10x10 EEZ
+### 6.3.3. Grid 10x10 Only EEZ
 
 ``` r
 grid10x10_EEZ<-grid10x10_EEZ
@@ -312,16 +497,16 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-33-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-52-1.png" width="100%" />
 
-# Maps
+# 7. Maps with annotations
 
 ``` r
 library(ggplot2)
 library(ggspatial)
 ```
 
-## Base Maps
+## 7.1. CRS 3050
 
 ``` r
 German_land<-GermanNorthSea::German_land
@@ -357,9 +542,9 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-36-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-55-1.png" width="100%" />
 
-### ICES rectangles
+### 7.1.1. ICES rectangles
 
 ``` r
 library(tidyverse)
@@ -409,9 +594,9 @@ ggplot(ICES_rectangles)+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-59-1.png" width="100%" />
 
-## Protected areas
+### 7.1.2. Protected areas
 
 ``` r
 German_natura<-GermanNorthSea::German_natura
@@ -451,11 +636,9 @@ ggplot(German_natura) +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-43-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-62-1.png" width="100%" />
 
-## Human activities
-
-### Wind Farms
+### 7.1.3. Wind Farms
 
 ``` r
 OWF_EMODnet<-GermanNorthSea::OWF_EMODnet
@@ -474,9 +657,9 @@ ggplot(OWF_EMODnet)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-45-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-64-1.png" width="100%" />
 
-### Shipping lines
+### 7.1.4. Shipping lines
 
 ``` r
 German_Shipping<-GermanNorthSea::German_Shipping
@@ -495,18 +678,15 @@ ggplot(German_Shipping)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-47-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-66-1.png" width="100%" />
 
-### Shipping intensity
-
-# Other CRS
+## 7.2. CRS 4326
 
 For using other CRS, you can use the function **st_transform** from the
 package **sf**.
 
 ``` r
 library(sf)
-#> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.3.1; sf_use_s2() is TRUE
 ```
 
 ``` r
@@ -550,85 +730,9 @@ ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-51-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-70-1.png" width="100%" />
 
-# GEBCO Bathymetry
-
-To download [GEBCO: General Bathymetry Chart of the
-Oceans](https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area)
-
-Go to: Download data for user-defined areas Use the application. Add
-your coordinates here I use 1 to 10 and 50 to 60. Add to basket and
-download.
-
-<https://download.gebco.net/>
-
-Use the [terra
-package](https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure.html)
-
-``` r
-library(terra)
-#> terra 1.7.78
-#> 
-#> Attaching package: 'terra'
-#> The following object is masked from 'package:tidyr':
-#> 
-#>     extract
-```
-
-``` r
-Bath_file<-rast(this_file)
-```
-
-``` r
-Bath_dataframe <- as.data.frame(Bath_file, xy = TRUE)
-```
-
-Alternatively
-
-``` r
-Bath_dataframe<-GermanNorthSea::German_bath
-```
-
-``` r
-Bath_dataframe_sub <-Bath_dataframe  %>%
-  filter(x > 2 & x < 10)%>%
-  filter(y > 52 & y < 57)%>%
-  rename(Bathymetry=3) %>%
-  filter(Bathymetry < 10)%>%
-  mutate(Bathymetry = as.numeric(Bathymetry))
-```
-
-``` r
-library(ggplot2)
-```
-
-``` r
-German_land<-st_transform(German_land, 4326)
-```
-
-``` r
-ggplot() +
-  geom_raster(data = Bath_dataframe_sub , aes(x = x, y = y, fill = Bathymetry)) +
-  geom_sf(data = German_land, colour = 'black', fill = '#ffffbe')+
-  scale_fill_viridis_c(option = "mako")+
-  theme_void()+
-  theme(legend.position='bottom')+
-  xlab('Longitude')+ylab('Latitude')+
-  coord_sf(xlim = c(3,9), ylim = c(53,56),
-                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
-```
-
-<img src="man/figures/README-unnamed-chunk-60-1.png" width="100%" />
-
-Do not forget to cite:
-
-If the data sets are used in a presentation or publication then we ask
-that you acknowledge the source.This should be of the form: GEBCO
-Compilation Group (2024) GEBCO 2024 Grid
-(<doi:10.5285/1c44ce99-0a0d-5f4f-e063-7086abc0ea0f>)
-
-# Other sources
+# 8. Other sources
 
 - [Marine Spatial
   Planning](https://www.bsh.de/EN/TOPICS/Offshore/Maritime_spatial_planning/maritime_spatial_planning_node.html)
