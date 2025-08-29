@@ -55,6 +55,7 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = German_land, colour = 'black', fill =
 
 To download go to: [DIVA-GIS](https://www.diva-gis.org/datadown)<br> 
 Select the country and Administrative areas. 
+
 ```{r}
 Germany<-GermanNorthSea::Germany
 ```
@@ -84,7 +85,7 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = German_EEZ,
 ```
 
 
-## 2.4. German EZZ coast
+## 2.4. German EEZ coast
 
 ```{r}
 German_coast<-GermanNorthSea::German_coast
@@ -98,6 +99,29 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
+## 2.5. EEZ polygon
+
+```{r, echo=FALSE, eval=FALSE}
+library(here)
+here()
+#EEZ_North<-st_read(file.path(here(),'tests/North_polygon.shp'))
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = EEZ_North, colour = "black", fill= '#bde0fe',alpha=0.9, lwd = 1)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+# rdata
+#save(EEZ_North, file = "EEZ_North.rda", version = 2)
+```
+
+
+
+```{r}
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = EEZ_North, 
+                                    colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 1,linetype="dashed")+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
 
 
 # 3. Protected areas
