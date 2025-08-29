@@ -14,7 +14,7 @@ This package contains shapefiles from the **German North Sea**: <br>
 
 The goal is provide easy access to shapefiles of the North Sea
 
-Most shapefiles are in CRS 3035.
+Shapefiles are in CRS 3035, and 4326.
 
 # 1. Installation
 
@@ -84,7 +84,7 @@ ggplot2::ggplot()+ ggplot2::geom_sf(data = German_EEZ,
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
-## 2.4. German EZZ coast
+## 2.4. German EEZ coast
 
 ``` r
 German_coast<-GermanNorthSea::German_coast
@@ -99,6 +99,22 @@ ggplot2::ggplot()+
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+
+## 2.5. EEZ polygon
+
+``` r
+EEZ_North<-GermanNorthSea::EEZ_North
+```
+
+``` r
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = EEZ_North, 
+                                    colour = "black", fill= '#bde0fe',alpha=0.9, lwd = 0.5)+
+  ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
+                    label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
+```
+
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 # 3. Protected areas
 
@@ -122,7 +138,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
 
 ### 3.2. Special Conservation Areas
 
@@ -143,7 +159,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
 
 ### 3.3. SPA and SCA
 
@@ -155,7 +171,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
 
 # 4. Human activities
 
@@ -176,7 +192,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />
 
 ## 4.2. Wind Farms
 
@@ -197,7 +213,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-22-1.png" width="100%" />
 
 ### 4.2.2. EMODnet
 
@@ -217,7 +233,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-21-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-24-1.png" width="100%" />
 
 # 5. Environmental variables
 
@@ -271,7 +287,7 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-29-1.png" width="100%" />
 
 Reference: If the data sets are used in a presentation or publication
 then we ask that you acknowledge the source.This should be of the form:
@@ -316,7 +332,7 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-35-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-38-1.png" width="100%" />
 
 # 6. Zonification
 
@@ -407,7 +423,7 @@ ggplot() +
 #> generated.
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-43-1.png" width="100%" />
 
 ## 6.2. ICES Rectangles
 
@@ -427,7 +443,7 @@ ggplot2::ggplot(German_ICES)+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-45-1.png" width="100%" />
 
 ## 6.3. Grids
 
@@ -457,7 +473,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-46-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-49-1.png" width="100%" />
 
 ### 6.3.2. Grid 10x10
 
@@ -472,7 +488,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-49-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-52-1.png" width="100%" />
 
 ``` r
 ggplot() +
@@ -488,7 +504,7 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-50-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-53-1.png" width="100%" />
 
 ### 6.3.3. Grid 10x10 Only EEZ
 
@@ -503,7 +519,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-53-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-56-1.png" width="100%" />
 
 # 7. Maps with annotations
 
@@ -548,7 +564,7 @@ ggplot() +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-56-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-59-1.png" width="100%" />
 
 ### 7.1.1. ICES rectangles
 
@@ -600,7 +616,7 @@ ggplot(ICES_rectangles)+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-60-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-63-1.png" width="100%" />
 
 ### 7.1.2. Protected areas
 
@@ -642,7 +658,7 @@ ggplot(German_natura) +
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-63-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-66-1.png" width="100%" />
 
 ### 7.1.3. Wind Farms
 
@@ -663,7 +679,7 @@ ggplot(OWF_EMODnet)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-65-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-68-1.png" width="100%" />
 
 ### 7.1.4. Shipping lines
 
@@ -684,7 +700,7 @@ ggplot(German_Shipping)+
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-67-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-70-1.png" width="100%" />
 
 ## 7.2. CRS 4326
 
@@ -736,9 +752,24 @@ ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-<img src="man/figures/README-unnamed-chunk-71-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-74-1.png" width="100%" />
 
-# 8. Other sources
+# 8. Export to shapefile
+
+To export as shapefile and use on other programs (e.g. QGIS)
+
+``` r
+library(GermanNorthSea)
+library(here)
+library(sf)
+
+thisdirectory<-here::here()
+EEZ_North<-EEZ_North
+class(EEZ_North)
+st_write(EEZ_North,dsn = file.path(paste0(thisdirectory,"/EEZ_North.shp")))
+```
+
+# 9. Other sources
 
 - [Marine Spatial
   Planning](https://www.bsh.de/EN/TOPICS/Offshore/Maritime_spatial_planning/maritime_spatial_planning_node.html)

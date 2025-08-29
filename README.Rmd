@@ -24,7 +24,7 @@ This package contains shapefiles from the **German North Sea**: <br>
 
 The goal is provide easy access to shapefiles of the North Sea
 
-Most shapefiles are in CRS 3035.
+Shapefiles are in CRS 3035, and 4326.
 
 # 1. Installation
 
@@ -113,12 +113,14 @@ ggplot2::ggplot()+
 #save(EEZ_North, file = "EEZ_North.rda", version = 2)
 ```
 
-
+```{r}
+EEZ_North<-GermanNorthSea::EEZ_North
+```
 
 ```{r}
 ggplot2::ggplot()+ 
   ggplot2::geom_sf(data = EEZ_North, 
-                                    colour = "red", fill= '#bde0fe',alpha=0.9, lwd = 1,linetype="dashed")+
+                                    colour = "black", fill= '#bde0fe',alpha=0.9, lwd = 0.5)+
   ggplot2::coord_sf(xlim = c(3790000,4250000), ylim = c(3350000,3680000),
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
@@ -820,7 +822,22 @@ ggplot()+
 ```
 
 
-# 8. Other sources
+# 8. Export to shapefile
+
+To export as shapefile and use on other programs (e.g. QGIS)
+
+```{r, eval=FALSE}
+library(GermanNorthSea)
+library(here)
+library(sf)
+
+thisdirectory<-here::here()
+EEZ_North<-EEZ_North
+class(EEZ_North)
+st_write(EEZ_North,dsn = file.path(paste0(thisdirectory,"/EEZ_North.shp")))
+```
+
+# 9. Other sources
 
 - [Marine Spatial Planning](https://www.bsh.de/EN/TOPICS/Offshore/Maritime_spatial_planning/maritime_spatial_planning_node.html)
 
