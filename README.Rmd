@@ -132,11 +132,11 @@ ggplot2::ggplot()+
 ```{r, echo=FALSE, eval=FALSE}
 library(here)
 here()
-EEZ_Baltic<-st_read(file.path(here(),'/Baltic_EEZ_E.shp'))
+#EEZ_Baltic<-st_read(file.path(here(),'/Baltic_EEZ_E.shp'))
 ggplot2::ggplot()+ 
   ggplot2::geom_sf(data = EEZ_Baltic, colour = "black", fill= '#bde0fe',alpha=0.9, lwd = 1)
 # rdata
-save(EEZ_Baltic, file = "EEZ_Baltic.rda", version = 2)
+#save(EEZ_Baltic, file = "EEZ_Baltic.rda", version = 2)
 ```
 
 ```{r}
