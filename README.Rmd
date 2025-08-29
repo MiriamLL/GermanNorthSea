@@ -15,14 +15,16 @@ knitr::opts_chunk$set(
 
 # German North Sea
 
-This package contains shapefiles from the **German North Sea**: <br>  
+This package contains shapefiles from the **German Seas**: <br>  
 
 - [Natura2000](https://www.eea.europa.eu/data-and-maps/data/natura-13/natura-2000-spatial-data/natura-2000-shapefile-1)<br> 
 - [Country shape](https://www.diva-gis.org/datadown)<br> 
 - [Economic Exclusive zone](https://marineregions.org/gazetteer.php?p=details&id=5669)<br> 
 - [ICES rectangles](https://gis.ices.dk/shapefiles/ICES_rectangles.zip)<br> 
 
-The goal is provide easy access to shapefiles of the North Sea
+The goal is provide easy access to shapefiles of the German Seas.
+
+Mostly focused on German North Sea, but also supports some for Baltic Sea. 
 
 Shapefiles are in CRS 3035, and 4326.
 
@@ -99,7 +101,7 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
-## 2.5. EEZ polygon
+## 2.5. EEZ North
 
 ```{r, echo=FALSE, eval=FALSE}
 library(here)
@@ -125,6 +127,27 @@ ggplot2::ggplot()+
                     label_axes = list(top = "E", left = "N", bottom = 'E', right='N'))
 ```
 
+## 2.6. EEZ Baltic 
+
+```{r, echo=FALSE, eval=FALSE}
+library(here)
+here()
+EEZ_Baltic<-st_read(file.path(here(),'/Baltic_EEZ_E.shp'))
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = EEZ_Baltic, colour = "black", fill= '#bde0fe',alpha=0.9, lwd = 1)
+# rdata
+save(EEZ_Baltic, file = "EEZ_Baltic.rda", version = 2)
+```
+
+```{r}
+EEZ_Baltic<-GermanNorthSea::EEZ_Baltic
+```
+
+```{r}
+ggplot2::ggplot()+ 
+  ggplot2::geom_sf(data = EEZ_Baltic, 
+                                    colour = "black", fill= '#bde0fe',alpha=0.9, lwd = 0.5)
+```
 
 # 3. Protected areas
 
@@ -832,9 +855,8 @@ library(here)
 library(sf)
 
 thisdirectory<-here::here()
-EEZ_North<-EEZ_North
-class(EEZ_North)
-st_write(EEZ_North,dsn = file.path(paste0(thisdirectory,"/EEZ_North.shp")))
+st_write(German_coast,dsn = file.path(paste0(thisdirectory,"/German_coast.shp")))
+st_write(German_EEZ,dsn = file.path(paste0(thisdirectory,"/German_EEZ_bothSeas.shp")))
 ```
 
 # 9. Other sources
